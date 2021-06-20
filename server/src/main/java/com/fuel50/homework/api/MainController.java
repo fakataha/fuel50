@@ -25,7 +25,7 @@ public class MainController {
 
   @Autowired private MoodCounter moodCounter;
 
-  @GetMapping("/ping")
+  @GetMapping("/v1/ping")
   public StatusResponse getStatus() {
     List<MoodRecord> moodRecords = moodTrackerService.getAllMoodRecords();
     int numberOfRecords = moodRecords.size();
@@ -41,7 +41,7 @@ public class MainController {
         .build();
   }
 
-  @GetMapping("/mood/summary")
+  @GetMapping("/v1/mood/summary")
   public SummaryResponse getSummary() {
     List<MoodRecord> moodRecords = moodTrackerService.getCurrentMoodRecords();
 
@@ -67,7 +67,7 @@ public class MainController {
         .build();
   }
 
-  @PostMapping("/mood")
+  @PostMapping("/v1/mood")
   public SuccessResponse addMoodRecord(MoodRecord moodRecord) {
     MoodRecord storedRecord = moodTrackerService.add(moodRecord);
     if (storedRecord != null) {
