@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MoodTrackerComponentTest {
 
   @Test
+  void contextLoads() {}
+
+  @Test
   @DisplayName("Retrieve successful response from ping.")
   void testSuccess() {
     given().when().get("/ping").then().statusCode(200).log().all();

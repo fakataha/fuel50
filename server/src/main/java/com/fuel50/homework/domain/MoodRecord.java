@@ -6,8 +6,8 @@ import javax.persistence.*;
 import org.springframework.lang.Nullable;
 
 @Entity
-@Table(name = "moodRecord")
-public final class MoodRecord {
+@Table(name = "MOOD_RECORD")
+public class MoodRecord {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
