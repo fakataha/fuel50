@@ -12,6 +12,9 @@ public class MoodCounter implements BiFunction<List<MoodRecord>, Mood, Integer> 
 
   @Override
   public Integer apply(List<MoodRecord> moodRecords, Mood mood) {
+    if (moodRecords == null || moodRecords.isEmpty() || mood == null) {
+      return 0;
+    }
     long count = moodRecords.stream().filter(record -> mood.equals(record.getMood())).count();
     return Math.toIntExact(count);
   }

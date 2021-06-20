@@ -17,7 +17,7 @@ public class MoodTrackerService {
   }
 
   public List<MoodRecord> getCurrentMoodRecords() {
-    OffsetDateTime startOfDay = OffsetDateTime.now().with(ChronoField.HOUR_OF_DAY, 0);
+    OffsetDateTime startOfDay = OffsetDateTime.now().with(ChronoField.HOUR_OF_DAY, 0).with(ChronoField.MINUTE_OF_DAY, 0);
     List<MoodRecord> moodRecords =
         moodTrackerRepository.findAllWithCreationDateTimeAfter(startOfDay);
     return moodRecords;

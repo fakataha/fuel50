@@ -22,4 +22,4 @@ Intended to test the application using in memory database and application startu
 Intended to test the functionality between the application and any integrations it relies on in a Dockerised container to provide closer fidelity to production environments.
 
 ### Smoke Testing
-Intended to confirm the application is deployed and running successfully. Mostly beneficial in a mature CI/CD pipeline to confirm the deploy worked as expected.
+Intended to confirm the application is deployed and running successfully. Mostly beneficial in a mature CI/CD pipeline to confirm the deploy and startup.

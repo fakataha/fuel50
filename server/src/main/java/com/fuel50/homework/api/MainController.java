@@ -26,9 +26,9 @@ public class MainController {
 
   @GetMapping("/ping")
   public StatusResponse getStatus() {
-    List<MoodRecord> moodRecordList = moodTrackerService.getAllMoodRecords();
-    int numberOfRecords = moodRecordList.size();
-    MoodRecord lastRecord = moodRecordList.get(numberOfRecords - 1);
+    List<MoodRecord> moodRecords = moodTrackerService.getAllMoodRecords();
+    int numberOfRecords = moodRecords.size();
+    MoodRecord lastRecord = moodRecords.get(numberOfRecords - 1);
     return StatusResponse.builder()
         .setLastRecordEvent(lastRecord.getCreationDateTime())
         .setUp(true)

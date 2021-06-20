@@ -34,7 +34,7 @@ public final class SummaryResponse {
     return justNormalReally;
   }
 
-  public int getaBitMeh() {
+  public int getABitMeh() {
     return aBitMeh;
   }
 

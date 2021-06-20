@@ -26,6 +26,7 @@ ext {
     mySqlVersion = '8.0.23'
     h2Version = '1.4.200'
     restAssuredVersion = '4.4.0'
+    mockitoVersion = '3.11.1'
 }
 
 dependencies {
@@ -38,9 +39,13 @@ dependencies {
 
     testImplementation "com.h2database:h2:${h2Version}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
     testImplementation "org.assertj:assertj-core:${assertJVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 
+    componentTestImplementation "com.h2database:h2:${h2Version}"
     componentTestImplementation "org.springframework.boot:spring-boot-starter-test"
     componentTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
 

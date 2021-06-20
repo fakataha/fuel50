@@ -18,7 +18,7 @@ public final class MoodRecord {
   private String moodMessage;
 
   @Column(name = "creation-date-time")
-  private OffsetDateTime creationDateTime;
+  private OffsetDateTime creationDateTime = OffsetDateTime.now();
 
   @Enumerated(EnumType.ORDINAL)
   private Mood mood;
@@ -58,8 +58,7 @@ public final class MoodRecord {
     MoodRecord that = (MoodRecord) o;
     return Objects.equals(id, that.id)
         && Objects.equals(moodMessage, that.moodMessage)
-        && Objects.equals(mood, that.mood)
-        && Objects.equals(creationDateTime, that.creationDateTime);
+        && Objects.equals(mood, that.mood);
   }
 
   @Override
