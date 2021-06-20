@@ -23,3 +23,6 @@ Intended to test the functionality between the application and any integrations 
 
 ### Smoke Testing
 Intended to confirm the application is deployed and running successfully. Mostly beneficial in a mature CI/CD pipeline to confirm the deploy and startup.
+
+## Troubleshooting
+Docker issues

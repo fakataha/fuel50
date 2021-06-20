@@ -71,5 +71,16 @@ test {
     useJUnitPlatform()
 }
 
+task copyDocker(type: Copy) {
+    from "${ rootProject.projectDir}/docker"
+    into "${rootProject.buildDir}"
+}
+
+dockerCompose {
+    useComposeFiles = ["${rootProject.buildDir}/docker-compose.yml"]
+    projectName = project.name
+}
+composeUp.dependsOn copyDocker
+
 integrationTest.dependsOn composeUp
 integrationTest.finalizedBy composeDown

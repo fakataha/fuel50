@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface MoodTrackerRepository extends JpaRepository<MoodRecord, Long> {
 
-  @Query("select * from MoodRecord r where r.creationDateTime >= :creationDateTime")
+  @Query(
+      value = "select * from MoodRecord r where r.creationDateTime >= :creationDateTime",
+      nativeQuery = true)
   List<MoodRecord> findAllWithCreationDateTimeAfter(
       @Param("creationDateTime") OffsetDateTime creationDateTime);
 }

@@ -6,6 +6,7 @@ import com.fuel50.homework.api.model.SummaryResponse;
 import com.fuel50.homework.domain.Mood;
 import com.fuel50.homework.domain.MoodRecord;
 import com.fuel50.homework.domain.MoodTrackerService;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,13 @@ public class MainController {
   public StatusResponse getStatus() {
     List<MoodRecord> moodRecords = moodTrackerService.getAllMoodRecords();
     int numberOfRecords = moodRecords.size();
-    MoodRecord lastRecord = moodRecords.get(numberOfRecords - 1);
+    OffsetDateTime lastRecordDateTime = null;
+    if (!moodRecords.isEmpty()) {
+      MoodRecord lastRecord = moodRecords.get(numberOfRecords - 1);
+      lastRecordDateTime = lastRecord.getCreationDateTime();
+    }
     return StatusResponse.builder()
-        .setLastRecordEvent(lastRecord.getCreationDateTime())
+        .setLastRecordEvent(lastRecordDateTime)
         .setUp(true)
         .setNumberOfRecords(numberOfRecords)
         .build();

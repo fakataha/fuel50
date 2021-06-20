@@ -6,21 +6,22 @@ import javax.persistence.*;
 import org.springframework.lang.Nullable;
 
 @Entity
-@Table(name = "mood-record")
+@Table(name = "moodRecord")
 public final class MoodRecord {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "mood-message", length = 350)
+  @Column(name = "moodMessage", length = 350)
   @Nullable
   private String moodMessage;
 
-  @Column(name = "creation-date-time")
+  @Column(name = "creationDateTime")
   private OffsetDateTime creationDateTime = OffsetDateTime.now();
 
   @Enumerated(EnumType.ORDINAL)
+  @Column(name = "mood")
   private Mood mood;
 
   public MoodRecord() {}
