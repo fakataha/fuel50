@@ -1,0 +1,20 @@
+<div>
+  <div class="card bg-light mb-3">
+    <form [formGroup]="moodForm" (ngSubmit)="onSubmit()">
+    <h2>How are you today?</h2>
+        <input type="radio" value="0" formControlName="moods">Happy
+        <input type="radio" value="1" formControlName="moods">Just normal really
+        <input type="radio" value="2" formControlName="moods">A bit "meh"
+        <input type="radio" value="3" formControlName="moods">Grumpy
+        <input type="radio" value="4" formControlName="moods">Stressed out - Not a happy camper
+        <input type="text" formControlName="moodMessage">
+        <button id="submit_button">Submit</button>
+    </form>
+    <div class="card-header">
+      <p *ngIf="online; then thenBlock else elseBlock"></p>
+      <ng-template #thenBlock>online</ng-template>
+      <ng-template #elseBlock>offline</ng-template>
+    </div>
+  </div>
+</div>
+

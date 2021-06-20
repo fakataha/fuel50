@@ -101,7 +101,7 @@ class MainControllerTest {
     Assertions.assertThat(result)
         .isNotNull()
         .extracting("httpStatusCode", "message", "body")
-        .containsExactly(200, "Recorded successfully!", moodRecord);
+        .containsExactly(201, "Recorded successfully!", moodRecord);
   }
 
   @Test

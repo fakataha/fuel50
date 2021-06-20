@@ -67,6 +67,11 @@ public class MoodRecord {
     return Objects.hash(id, moodMessage, mood, creationDateTime);
   }
 
+  @Override
+  public String toString() {
+    return "MoodRecord: " + mood + " with Message: " + moodMessage;
+  }
+
   public static final class Builder {
 
     private String moodMessage;
