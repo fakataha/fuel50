@@ -1,30 +1,52 @@
 plugins {
+    id "org.unbroken-dome.test-sets" version "4.0.0"
     id 'com.avast.gradle.docker-compose' version '0.14.0'
     id 'org.springframework.boot' version '2.4.2'
     id 'com.diffplug.spotless' version '5.9.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
+
 group 'com.fuel50.homework'
-version '1.0-SNAPSHOT'
+version '1.1'
 
 repositories {
     mavenCentral()
+}
+
+testSets {
+    componentTest
+    integrationTest
+    smokeTest
+}
+
+ext {
+    junitVersion = '5.7.1'
+    assertJVersion = '3.11.1'
+    mySqlVersion = '8.0.23'
+    h2Version = '1.4.200'
+    restAssuredVersion = '4.4.0'
 }
 
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation "mysql:mysql-connector-java:${mySqlVersion}"
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.h2database:h2:1.4.200'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
-    testImplementation 'org.assertj:assertj-core:3.11.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
+    testImplementation "com.h2database:h2:${h2Version}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.assertj:assertj-core:${assertJVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
+    componentTestImplementation "org.springframework.boot:spring-boot-starter-test"
+    componentTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+
+    integrationTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+
+    smokeTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
 }
 
 java {
@@ -38,7 +60,11 @@ spotless {
         googleJavaFormat()
     }
 }
+build.dependsOn spotlessApply
 
 test {
     useJUnitPlatform()
 }
+
+integrationTest.dependsOn composeUp
+integrationTest.finalizedBy composeDown

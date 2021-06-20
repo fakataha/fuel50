@@ -12,8 +12,8 @@ services:
       # user/password: root/example
       MYSQL_ROOT_PASSWORD: example
 
-  adminer:
-    image: adminer
+  mood-tracker:
+    image: mood-tracker
     restart: always
     ports:
       - 8081:8080
