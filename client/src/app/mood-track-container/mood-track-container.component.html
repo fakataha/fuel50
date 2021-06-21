@@ -25,6 +25,7 @@
           <ng-template #showMessage>Sorry, you can only submit once per day, please come back tomorrow.</ng-template>
           <ng-template #hideMessage></ng-template>
       </div>
+    <app-mood-summary-chart *ngIf="summarize"></app-mood-summary-chart>
     <div class="card-header">
       <p *ngIf="online; then thenBlock else elseBlock"></p>
       <ng-template #thenBlock>online</ng-template>

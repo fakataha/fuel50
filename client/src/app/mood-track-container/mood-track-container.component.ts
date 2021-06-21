@@ -12,10 +12,10 @@ const COOKIE_NAME = 'moodie-cookie';
 })
 export class MoodTrackContainerComponent implements OnInit {
 
-  // TODO: remove online flag
   private online: boolean;
   private moodForm: FormGroup;
   private submitted: boolean;
+  private summarize: boolean;
 
   constructor(private moodTrackerService: MoodTrackerService, private cookieService: CookieService, private fb: FormBuilder) {
   }
@@ -45,7 +45,7 @@ export class MoodTrackContainerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.checkCookie();
+    // this.checkCookie();
     if (!this.submitted) {
       this.moodTrackerService.submit({
         creationDateTime: null,
@@ -54,6 +54,7 @@ export class MoodTrackContainerComponent implements OnInit {
       })
       .subscribe(result => {
         this.setCookies();
+        this.summarize = true;
       });
     }
   }
