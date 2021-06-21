@@ -1,13 +1,23 @@
 <div>
   <div class="card bg-light mb-3">
-    <form [formGroup]="moodForm" (ngSubmit)="onSubmit()">
-    <h2>How are you today?</h2>
+      <h2>How are you today?</h2>
+      <form [formGroup]="moodForm" (ngSubmit)="onSubmit()">
+          <label class="display-block">
         <input type="radio" value="0" formControlName="moods">Happy
+          </label>
+          <label class="display-block">
         <input type="radio" value="1" formControlName="moods">Just normal really
+          </label>
+          <label class="display-block">
         <input type="radio" value="2" formControlName="moods">A bit "meh"
+          </label>
+          <label class="display-block">
         <input type="radio" value="3" formControlName="moods">Grumpy
+          </label>
+          <label class="display-block">
         <input type="radio" value="4" formControlName="moods">Stressed out - Not a happy camper
-        <input type="text" formControlName="moodMessage">
+          </label>
+        <input type="text" placeholder="Add a message with your mood." id="mood_message" formControlName="moodMessage">
         <button id="submit_button">Submit</button>
     </form>
       <div class="alert-primary">

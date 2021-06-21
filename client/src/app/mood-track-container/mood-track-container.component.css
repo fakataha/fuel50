@@ -1,0 +1,40 @@
+form > label {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: normal;
+}
+
+input[type="radio"] {
+    margin: 1%;
+}
+
+#submit_button {
+    width: 98%;
+    margin: 5px;
+}
+
+#mood_message {
+    width: 98%;
+    height: 5em;
+    margin: 5px;
+    padding: 2%
+}
+
+.card > #mood_message {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+}
+
+.alert-primary {
+    margin: 2%;
+}
+
+h2 {
+    width:98%;
+    text-align:center;
+    margin: 2%;
+    padding: 5px;
+}
