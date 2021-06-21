@@ -8,6 +8,7 @@ import com.fuel50.homework.domain.MoodRecord;
 import com.fuel50.homework.domain.MoodTrackerService;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +47,6 @@ public class MainController {
   public SummaryResponse getSummary() {
     List<MoodRecord> moodRecords = moodTrackerService.getCurrentMoodRecords();
 
-    // RxJava here?
-
     int happy = moodCounter.apply(moodRecords, Mood.HAPPY);
     int justNormalReally = moodCounter.apply(moodRecords, Mood.JUST_NORMAL_REALLY);
     int aBitMeh = moodCounter.apply(moodRecords, Mood.A_BIT_MEH);
@@ -56,7 +55,10 @@ public class MainController {
         moodCounter.apply(moodRecords, Mood.STRESSED_OUT_NOT_A_HAPPY_CAMPER);
 
     List<String> moodMessages =
-        moodRecords.stream().map(MoodRecord::getMoodMessage).collect(Collectors.toList());
+        moodRecords.stream()
+            .map(MoodRecord::getMoodMessage)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
     return SummaryResponse.builder()
         .setHappy(happy)

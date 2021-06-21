@@ -29,7 +29,7 @@ public class MoodTrackerIntegrationTest {
         MoodRecord.builder().setMoodMessage("TESTING").setMood(Mood.HAPPY).build();
     given()
         .body(moodRecord)
-            .contentType(ContentType.JSON)
+        .contentType(ContentType.JSON)
         .when()
         .post("http://localhost:8081/api/v1/mood")
         .then()

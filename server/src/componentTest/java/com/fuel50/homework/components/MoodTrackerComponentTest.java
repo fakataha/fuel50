@@ -8,5 +8,4 @@ class MoodTrackerComponentTest {
 
   @Test
   void contextLoads() {}
-
 }

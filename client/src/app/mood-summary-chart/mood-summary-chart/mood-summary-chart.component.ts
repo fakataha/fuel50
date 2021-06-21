@@ -27,8 +27,7 @@ export class MoodSummaryChartComponent implements OnInit {
   public options: any = {
 
     chart: {
-      polar: true,
-      type: 'line'
+      polar: true
     },
 
     title: {
@@ -36,53 +35,23 @@ export class MoodSummaryChartComponent implements OnInit {
     },
 
     xAxis: {
-      tickmarkPlacement: 'on',
-      lineWidth: 0,
-      categories: ['Happy', 'Just normal really', 'A bit "meh"', 'Grumpy', 'Stressed out, not a happy camper'],
-      labels: {
-        format: '{value}'
-      }
+      min: 0,
+      tickInterval: 45,
+      categories: ['Happy', 'Just normal really', 'A bit meh', 'Grumpy', 'Stressed out, not a happy camper']
+    },
+
+    legend: {
+      enabled: false
     },
 
     yAxis: {
       min: 0
     },
 
-    plotOptions: {
-      series: {
-        pointStart: 0,
-        pointInterval: 45
-      },
-      column: {
-        pointPadding: 0,
-        groupPadding: 0
-      }
-    },
-
-    series: [{
-      type: 'line',
-      name: 'Happy',
-      data: [],
-    },
+    series: [
       {
-        type: 'line',
-        name: 'Just normal really',
-        data: [],
-      },
-      {
-        type: 'line',
-        name: 'A bit "meh"',
-        data: [],
-      },
-      {
-        type: 'line',
-        name: 'Grumpy',
-        data: [],
-      },
-      {
-        type: 'line',
-        name: 'Stressed out, not a happy camper',
-        data: [],
+        name: 'People',
+        data: []
       }]
 
   };
@@ -99,13 +68,18 @@ export class MoodSummaryChartComponent implements OnInit {
   showSummary() {
     this.moodTrackerService.getSummary()
         .subscribe(result => {
-          console.log(result);
-          this.options.series[0]['data']  = result.happy;
-          this.options.series[1]['data']  = result.justNormalReally;
-          this.options.series[2]['data']  = result.aBitMeh;
-          this.options.series[3]['data']  = result.grumpy;
-          this.options.series[4]['data']  = result.stressedOutNotAHappyCamper;
+          this.options.series[0]['data'] = [
+              result.happy,
+              result.justNormalReally,
+              result.abitMeh,
+              result.grumpy,
+              result.stressedOutNotAHappyCamper
+          ];
+          console.log(this.options);
           Highcharts.chart('container', this.options);
+        },
+        error => {
+          console.log(error);
         });
   }
 }

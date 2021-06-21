@@ -1,7 +1,7 @@
 export interface MoodSummary {
     happy: number;
     justNormalReally: number;
-    aBitMeh: number;
+    abitMeh: number;
     grumpy: number;
     stressedOutNotAHappyCamper: number;
     moodMessages: string[];
