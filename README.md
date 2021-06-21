@@ -30,11 +30,9 @@ The user is anonymous – so this app does not require any authentication. The U
 * Angular Devkit (https://www.npmjs.com/package/@angular-devkit/build-angular)
 * Docker (https://docs.docker.com/get-started/)
 
-## Usage
-
 ### server
 
-Run ``./gradlew composeUp`` to start the Docker containers for MySQL and Mood Tracker API.
+Run ``./gradlew clean build composeUp`` to start the Docker containers for MySQL and Mood Tracker API.
 MySQL can be found on port 3306 (use root/example as credentials)
 Mood Tracker API can be found on port 8081
 
@@ -44,13 +42,6 @@ Start with ``npm install`` to install all dependencies
 After that, run ``npm run start`` to start the Angular server
 Navigate to ``http://localhost:4200`` to run the app.
 
-## Technical Choices
-* Use Builder patterns (avoid Lombok).
-* Use field injection over constructors.
-* Use OffsetDateTime to persist creation date for events.
-* Introduce additional tests as separate modules.
-* Use enum for moods.
-* No caching.
-
-## Incomplete
-* Use
+## Challenges
+* No previous Angular experience.
+* Spring/MySQL configuration issues.

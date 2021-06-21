@@ -16,8 +16,8 @@ repositories {
 
 testSets {
     componentTest
-    integrationTest
-    smokeTest
+    integrationTest { extendsFrom componentTest}
+    smokeTest { extendsFrom integrationTest }
 }
 
 ext {
@@ -25,7 +25,7 @@ ext {
     assertJVersion = '3.11.1'
     mySqlVersion = '8.0.23'
     h2Version = '1.4.200'
-    restAssuredVersion = '4.4.0'
+    restAssuredVersion = '4.2.0'
     mockitoVersion = '3.11.1'
 }
 
@@ -48,10 +48,10 @@ dependencies {
     componentTestImplementation "com.h2database:h2:${h2Version}"
     componentTestImplementation "org.springframework.boot:spring-boot-starter-test"
     componentTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
-
-    integrationTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
-
-    smokeTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    componentTestImplementation "io.rest-assured:json-path:${restAssuredVersion}"
+    componentTestImplementation "io.rest-assured:xml-path:${restAssuredVersion}"
+    componentTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    componentTestImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
 }
 
 java {
