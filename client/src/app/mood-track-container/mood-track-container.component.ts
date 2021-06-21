@@ -45,16 +45,20 @@ export class MoodTrackContainerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.checkCookie();
+    this.checkCookie();
     if (!this.submitted) {
-      this.moodTrackerService.submit({
-        creationDateTime: null,
+      const moodRecord = {
         mood: this.moodForm.controls['moods'].value,
         moodMessage: this.moodForm.controls['moodMessage'].value
-      })
+      };
+      console.log(moodRecord);
+      this.moodTrackerService.submit(moodRecord)
       .subscribe(result => {
         this.setCookies();
         this.summarize = true;
+      },
+  error => {
+          console.log(error);
       });
     }
   }

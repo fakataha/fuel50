@@ -3,7 +3,7 @@ import * as Highcharts from "highcharts";
 import {MoodSummary} from "../../mood-track-container/mood-summary";
 import {MoodTrackerService} from "../../mood-tracker.service";
 
-// Taken from https://www.eduforbetterment.com/polar-chart-in-angular-using-highchart/
+// Referenced from https://www.eduforbetterment.com/polar-chart-in-angular-using-highchart/
 declare var require: any;
 const More = require('highcharts/highcharts-more');
 More(Highcharts);
@@ -27,24 +27,20 @@ export class MoodSummaryChartComponent implements OnInit {
   public options: any = {
 
     chart: {
-      polar: true
+      polar: true,
+      type: 'line'
     },
 
     title: {
       text: 'Mood Summary'
     },
 
-    pane: {
-      startAngle: 0,
-      endAngle: 360
-    },
-
     xAxis: {
-      tickInterval: 45,
-      min: 0,
-      max: 360,
+      tickmarkPlacement: 'on',
+      lineWidth: 0,
+      categories: ['Happy', 'Just normal really', 'A bit "meh"', 'Grumpy', 'Stressed out, not a happy camper'],
       labels: {
-        format: '{value}°'
+        format: '{value}'
       }
     },
 
@@ -103,11 +99,12 @@ export class MoodSummaryChartComponent implements OnInit {
   showSummary() {
     this.moodTrackerService.getSummary()
         .subscribe(result => {
-          this.options.series[0] = result.happy;
-          this.options.series[1] = result.justNormalReally;
-          this.options.series[2] = result.aBitMeh;
-          this.options.series[3] = result.grumpy;
-          this.options.series[4] = result.stressedOutNotAHappyCamper;
+          console.log(result);
+          this.options.series[0]['data']  = result.happy;
+          this.options.series[1]['data']  = result.justNormalReally;
+          this.options.series[2]['data']  = result.aBitMeh;
+          this.options.series[3]['data']  = result.grumpy;
+          this.options.series[4]['data']  = result.stressedOutNotAHappyCamper;
           Highcharts.chart('container', this.options);
         });
   }
