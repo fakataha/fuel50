@@ -10,6 +10,11 @@
         <input type="text" formControlName="moodMessage">
         <button id="submit_button">Submit</button>
     </form>
+      <div class="alert-primary">
+          <p *ngIf="submitted; then showMessage else hideMessage"></p>
+          <ng-template #showMessage>Sorry, you can only submit once per day, please come back tomorrow.</ng-template>
+          <ng-template #hideMessage></ng-template>
+      </div>
     <div class="card-header">
       <p *ngIf="online; then thenBlock else elseBlock"></p>
       <ng-template #thenBlock>online</ng-template>

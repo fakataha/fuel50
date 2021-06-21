@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MoodTrackerService } from '../mood-tracker.service';
-import { mergeMap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
-import {FormGroup, ReactiveFormsModule, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+
+const COOKIE_NAME = 'moodie-cookie';
 
 @Component({
-  selector: 'app-example-container',
+  selector: 'mood-track-container',
   templateUrl: './mood-track-container.component.html',
   styleUrls: ['./mood-track-container.component.css']
 })
 export class MoodTrackContainerComponent implements OnInit {
 
+  // TODO: remove online flag
   private online: boolean;
-  moodForm: FormGroup;
+  private moodForm: FormGroup;
+  private submitted: boolean;
 
   constructor(private moodTrackerService: MoodTrackerService, private cookieService: CookieService, private fb: FormBuilder) {
   }
@@ -20,6 +23,11 @@ export class MoodTrackContainerComponent implements OnInit {
   ngOnInit() {
     this.refreshData();
     this.initializeForm();
+  }
+
+  setCookies(): void {
+    const today = new Date();
+    this.cookieService.put(COOKIE_NAME, today.toUTCString());
   }
 
   initializeForm(): void {
@@ -37,14 +45,25 @@ export class MoodTrackContainerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.moodForm);
-    this.moodTrackerService.submit({
-      creationDateTime: null,
-      mood: this.moodForm.controls['moods'].value,
-      moodMessage : this.moodForm.controls['moodMessage'].value
-    })
-    .subscribe( result => {
-      console.log(result);
-    });
+    this.checkCookie();
+    if (!this.submitted) {
+      this.moodTrackerService.submit({
+        creationDateTime: null,
+        mood: this.moodForm.controls['moods'].value,
+        moodMessage: this.moodForm.controls['moodMessage'].value
+      })
+      .subscribe(result => {
+        this.setCookies();
+      });
+    }
+  }
+
+  private checkCookie() {
+    const lastSubmission = new Date(this.cookieService.get(COOKIE_NAME));
+    const startOfDayUTCDate = new Date();
+    const endOfDayUTCDate = new Date();
+    endOfDayUTCDate.setUTCHours(23, 59, 0);
+    startOfDayUTCDate.setUTCHours(0, 0, 0);
+    this.submitted = startOfDayUTCDate < lastSubmission && lastSubmission < endOfDayUTCDate;
   }
 }

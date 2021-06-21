@@ -34,7 +34,7 @@ The user is anonymous – so this app does not require any authentication. The U
 
 ### server
 
-Run ``./gradlew composeUp`` to start the Docker containers for MySQL and Mood Tracker, then ``./gradlew bootRun`` to start the SpringBoot application.
+Run ``./gradlew composeUp`` to start the Docker containers for MySQL and Mood Tracker API.
 MySQL can be found on port 3306 (use root/example as credentials)
 Mood Tracker API can be found on port 8081
 
@@ -48,6 +48,9 @@ Navigate to ``http://localhost:4200`` to run the app.
 * Use Builder patterns (avoid Lombok).
 * Use field injection over constructors.
 * Use OffsetDateTime to persist creation date for events.
-* Introduce component tests as a separate module.
+* Introduce additional tests as separate modules.
 * Use enum for moods.
 * No caching.
+
+## Incomplete
+* Use
